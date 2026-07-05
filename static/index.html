@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Lock UPP Season 2</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+  <!-- HERO -->
+  <div id="page-hero" class="page active">
+    <div class="hero">
+      <div class="title-group">
+        <span class="badge">SEASON 2</span>
+        <h1 class="show-title">LOCK UPP</h1>
+        <p class="show-tagline">All Episodes. One Click Away.</p>
+      </div>
+      <button class="btn-primary pulse" onclick="showPage('episodes')">
+        Get Episode Download Links
+      </button>
+    </div>
+  </div>
+
+  <!-- EPISODES -->
+  <div id="page-episodes" class="page">
+    <div class="container">
+      <button class="back-btn" onclick="showPage('hero')">&larr; Back</button>
+      <h2 class="section-title">Episodes</h2>
+      <div id="episodes-list"></div>
+      <div id="no-episodes" class="no-episodes" style="display:none">
+        <h2>No episodes available yet</h2>
+        <p>Check back later.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- JOIN CHECK -->
+  <div id="page-join" class="page">
+    <div class="container center">
+      <button class="back-btn" onclick="showPage('episodes')">&larr; Back</button>
+      <div class="join-card">
+        <div class="lock-icon">&#128274;</div>
+        <h2 id="join-title">Episode Locked</h2>
+        <p class="join-desc">Join our channel to access this episode's download link. It's free!</p>
+        <div class="btn-stack">
+          <a id="btn-apply" class="btn-join" href="#" target="_blank">Apply to Join</a>
+          <button id="btn-check" class="btn-check" onclick="checkJoin()">
+            <span id="spinner" class="spinner" style="display:none"></span>
+            <span id="check-text">Check Status</span>
+          </button>
+        </div>
+        <div id="status-msg" class="status-msg"></div>
+      </div>
+      <div id="download-box" class="download-box" style="display:none">
+        <div class="unlock-icon">&#128275;</div>
+        <h2>Access Granted!</h2>
+        <p>Your download link is ready.</p>
+        <a id="btn-download" class="btn-download" href="#" target="_blank">Go to Download Channel</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

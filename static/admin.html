@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Lock UPP</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="stylesheet" href="/static/css/admin.css">
+</head>
+<body>
+
+<div class="admin-wrap">
+  <div class="admin-sidebar">
+    <h2 class="admin-logo">LOCK UPP<br><small>Admin Panel</small></h2>
+    <nav>
+      <a href="#" onclick="showTab('channels')" class="nav-link active" id="nav-channels">Channels</a>
+      <a href="#" onclick="showTab('episodes')" class="nav-link" id="nav-episodes">Episodes</a>
+    </nav>
+  </div>
+
+  <div class="admin-main">
+
+    <!-- CHANNELS TAB -->
+    <div id="tab-channels" class="tab active">
+      <h1>Channel Settings</h1>
+      <p class="tab-desc">These apply to ALL episodes globally.</p>
+
+      <h3 class="form-section">REQ2JOIN Channel</h3>
+      <div class="form-group">
+        <label>Username (without @)</label>
+        <input type="text" id="inp-req2join-user" placeholder="e.g. mychannel">
+        <span class="hint">Used to check if user is in join requests.</span>
+      </div>
+      <div class="form-group">
+        <label>Invite Link</label>
+        <input type="text" id="inp-req2join-link" placeholder="e.g. https://t.me/mychannel">
+        <span class="hint">Shown to user as "Apply to Join" button.</span>
+      </div>
+
+      <h3 class="form-section">LINK Channel (Private)</h3>
+      <div class="form-group">
+        <label>Invite Link</label>
+        <input type="text" id="inp-link" placeholder="e.g. https://t.me/+AbCdEfGhIjK">
+        <span class="hint">Private channel where episodes are uploaded. Users get this after verification.</span>
+      </div>
+
+      <button class="btn-save" onclick="saveChannels()">Save Channels</button>
+      <div id="channel-msg" class="admin-msg"></div>
+    </div>
+
+    <!-- EPISODES TAB -->
+    <div id="tab-episodes" class="tab">
+      <h1>Manage Episodes</h1>
+
+      <div class="ep-form">
+        <div class="form-row">
+          <div class="form-group small">
+            <label>Episode #</label>
+            <input type="number" id="inp-ep-num" min="1" placeholder="1">
+          </div>
+          <div class="form-group">
+            <label>Title (optional)</label>
+            <input type="text" id="inp-ep-title" placeholder="Episode title">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Download Channel Username</label>
+          <input type="text" id="inp-ep-channel" placeholder="e.g. mychannel">
+          <span class="hint">Leave blank to use the global LINK channel.</span>
+        </div>
+        <button class="btn-save" onclick="saveEpisode()">Add / Update Episode</button>
+        <div id="ep-msg" class="admin-msg"></div>
+      </div>
+
+      <h2 style="margin-top:32px;margin-bottom:12px;font-size:1.1rem">Existing Episodes</h2>
+      <div id="episodes-table"></div>
+    </div>
+
+  </div>
+</div>
+
+<script src="/static/js/admin.js"></script>
+</body>
+</html>
