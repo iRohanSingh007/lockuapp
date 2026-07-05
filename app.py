@@ -3,6 +3,13 @@ import asyncio
 import threading
 from datetime import datetime
 from dotenv import load_dotenv
+
+# Fix for Python 3.14 - create event loop before pyrogram import
+try:
+    asyncio.get_event_loop()
+except RuntimeError:
+    asyncio.set_event_loop(asyncio.new_event_loop())
+
 from flask import Flask, request, jsonify, send_from_directory
 from pymongo import MongoClient
 from pyrogram import Client, raw
