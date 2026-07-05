@@ -23,7 +23,7 @@
     <!-- CHANNELS TAB -->
     <div id="tab-channels" class="tab active">
       <h1>Channel Settings</h1>
-      <p class="tab-desc">These apply to ALL episodes globally.</p>
+      <p class="tab-desc">REQ2JOIN is global - same for all episodes.</p>
 
       <h3 class="form-section">REQ2JOIN Channel</h3>
       <div class="form-group">
@@ -37,14 +37,7 @@
         <span class="hint">Shown to user as "Apply to Join" button.</span>
       </div>
 
-      <h3 class="form-section">LINK Channel (Private)</h3>
-      <div class="form-group">
-        <label>Invite Link</label>
-        <input type="text" id="inp-link" placeholder="e.g. https://t.me/+AbCdEfGhIjK">
-        <span class="hint">Private channel where episodes are uploaded. Users get this after verification.</span>
-      </div>
-
-      <button class="btn-save" onclick="saveChannels()">Save Channels</button>
+      <button class="btn-save" onclick="saveChannels()">Save</button>
       <div id="channel-msg" class="admin-msg"></div>
     </div>
 
@@ -64,9 +57,9 @@
           </div>
         </div>
         <div class="form-group">
-          <label>Download Channel Username</label>
-          <input type="text" id="inp-ep-channel" placeholder="e.g. mychannel">
-          <span class="hint">Leave blank to use the global LINK channel.</span>
+          <label>Download Link (private channel invite)</label>
+          <input type="text" id="inp-ep-link" placeholder="e.g. https://t.me/+AbCdEfGhIjK">
+          <span class="hint">Private channel invite link for this episode.</span>
         </div>
         <button class="btn-save" onclick="saveEpisode()">Add / Update Episode</button>
         <div id="ep-msg" class="admin-msg"></div>

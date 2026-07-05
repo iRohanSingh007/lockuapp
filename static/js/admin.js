@@ -31,14 +31,12 @@ async function loadSettings() {
     const s = await res.json();
     document.getElementById('inp-req2join-user').value = s.req2join_username || '';
     document.getElementById('inp-req2join-link').value = s.req2join_link || '';
-    document.getElementById('inp-link').value = s.link_channel || '';
   } catch (e) {}
 }
 
 async function saveChannels() {
   const rjUser = document.getElementById('inp-req2join-user').value.trim();
   const rjLink = document.getElementById('inp-req2join-link').value.trim();
-  const link = document.getElementById('inp-link').value.trim();
   try {
     await fetch(API + '/api/settings/req2join_username', {
       method: 'PUT', headers: headers(),
@@ -48,11 +46,7 @@ async function saveChannels() {
       method: 'PUT', headers: headers(),
       body: JSON.stringify({ value: rjLink })
     });
-    await fetch(API + '/api/settings/link_channel', {
-      method: 'PUT', headers: headers(),
-      body: JSON.stringify({ value: link })
-    });
-    showMsg('channel-msg', 'Channels saved!', true);
+    showMsg('channel-msg', 'Saved!', true);
   } catch (e) {
     showMsg('channel-msg', 'Error saving.', false);
   }
@@ -61,12 +55,12 @@ async function saveChannels() {
 async function saveEpisode() {
   const num = parseInt(document.getElementById('inp-ep-num').value);
   const title = document.getElementById('inp-ep-title').value.trim();
-  const channel = document.getElementById('inp-ep-channel').value.trim();
+  const link = document.getElementById('inp-ep-link').value.trim();
   if (!num) return showMsg('ep-msg', 'Enter episode number.', false);
+  if (!link) return showMsg('ep-msg', 'Enter download link.', false);
 
-  const data = { number: num };
+  const data = { number: num, downloadLink: link };
   if (title) data.title = title;
-  if (channel) data.linkChannel = channel;
 
   try {
     await fetch(API + '/api/episodes', {
@@ -76,7 +70,7 @@ async function saveEpisode() {
     showMsg('ep-msg', 'Episode ' + num + ' saved!', true);
     document.getElementById('inp-ep-num').value = '';
     document.getElementById('inp-ep-title').value = '';
-    document.getElementById('inp-ep-channel').value = '';
+    document.getElementById('inp-ep-link').value = '';
     loadEpisodesList();
   } catch (e) {
     showMsg('ep-msg', 'Error saving.', false);
@@ -96,7 +90,7 @@ async function loadEpisodesList() {
       <div class="ep-row">
         <div class="ep-row-num">${ep.number}</div>
         <div class="ep-row-title">${ep.title || 'Episode ' + ep.number}</div>
-        <div class="ep-row-channel">${ep.linkChannel || '(global)'}</div>
+        <div class="ep-row-channel">${ep.downloadLink ? ep.downloadLink.substring(0, 30) + '...' : 'no link'}</div>
         <div class="ep-row-actions">
           <button class="btn-sm" onclick="editEpisode(${ep.number})">Edit</button>
           <button class="btn-sm del" onclick="deleteEpisode(${ep.number})">Del</button>
@@ -114,7 +108,7 @@ async function editEpisode(num) {
     const ep = await res.json();
     document.getElementById('inp-ep-num').value = ep.number;
     document.getElementById('inp-ep-title').value = ep.title || '';
-    document.getElementById('inp-ep-channel').value = ep.linkChannel || '';
+    document.getElementById('inp-ep-link').value = ep.downloadLink || '';
   } catch (e) {}
 }
 

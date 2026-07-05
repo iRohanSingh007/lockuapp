@@ -52,15 +52,14 @@ async function selectEpisode(ep) {
   document.getElementById('status-msg').className = 'status-msg';
   document.getElementById('status-msg').textContent = '';
 
-  // Load settings for channel links
+  // Load REQ2JOIN link from settings, download link from episode
   try {
     const res = await fetch(API + '/api/settings');
     const settings = await res.json();
     const rjLink = settings.req2join_link || '';
-    const dlLink = settings.link_channel || '';
     document.getElementById('btn-apply').href = rjLink || '#';
     document.getElementById('btn-apply').style.display = rjLink ? '' : 'none';
-    document.getElementById('btn-download').href = dlLink || '#';
+    document.getElementById('btn-download').href = ep.downloadLink || '#';
   } catch (e) {}
 
   showPage('join');
