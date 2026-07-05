@@ -29,13 +29,20 @@ db = client["lockuapp"]
 episodes_col = db["episodes"]
 settings_col = db["settings"]
 
-pyro_client = Client(
-    name="locku_session",
-    api_id=API_ID,
-    api_hash=API_HASH,
-    workdir="/tmp" if not SESSION_STRING else None,
-    session_string=SESSION_STRING if SESSION_STRING else None
-)
+if SESSION_STRING:
+    pyro_client = Client(
+        name="locku_session",
+        api_id=API_ID,
+        api_hash=API_HASH,
+        session_string=SESSION_STRING
+    )
+else:
+    pyro_client = Client(
+        name="locku_session",
+        api_id=API_ID,
+        api_hash=API_HASH,
+        workdir="/tmp"
+    )
 pyro_ready = False
 
 
